@@ -21,8 +21,12 @@
 }
 .add-Button{
     background-color: goldenrod;
-    width: 150px;
-    height: 30px;
+    padding: 10px 20px;
     border: 1px solid #000;
-    border-radius: 5px
+    border-radius: 5px;
+    cursor: pointer;
+}
+p{
+    color: #000;
+    text-transform: capitalize;
 }

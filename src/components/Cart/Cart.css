@@ -1,0 +1,7 @@
+.title{
+    text-align: center;
+}
+tr td:nth-child(even){
+    padding-left: 40px;
+    text-align: right;
+}
