@@ -3,18 +3,22 @@ import "./Shop.css";
 import Product from "../Product/Product";
 import Cart from "../Cart/Cart";
 import Data from "../../Data/products";
+import { addToDb } from "../../utilities/db";
 
 const Shop = () => {
-    
-    const first10 = Data.slice(0,10);
-    
-    
+
     const handleAddProduct = (product) => {
         const newCart = [...cart, product];
         setCart(newCart);
+        addToDb(product.key);
     }
 
-    const [products,setProducts] = useState(first10);
+    const [products,setProducts] = useState([]);
+
+    useEffect( () => {
+        setProducts(Data);
+    },[])
+
 
     const [cart, setCart] = useState([]);
     return (
