@@ -21,6 +21,8 @@ const Cart = (props) => {
         return Number(precision);
     }
 
+    
+
     return (
         <div>
             <h3 className="title">Order Summary</h3>

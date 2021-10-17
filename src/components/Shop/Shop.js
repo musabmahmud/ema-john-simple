@@ -3,7 +3,7 @@ import "./Shop.css";
 import Product from "../Product/Product";
 import Cart from "../Cart/Cart";
 import Data from "../../Data/products";
-import { addToDb } from "../../utilities/db";
+import { addToDb, getStoredCart } from "../../utilities/db";
 
 const Shop = () => {
 
@@ -15,8 +15,20 @@ const Shop = () => {
 
     const [products,setProducts] = useState([]);
 
-    useEffect( () => {
+    useEffect(() => {
         setProducts(Data);
+    },[])
+
+
+    useEffect( () => {
+        const savedCart = getStoredCart();
+        const productKeys = Object.keys(savedCart);
+        const previousCart = productKeys.map( exist => {
+            const product = Data.find(pd => pd.key === exist);
+            product.quantity = savedCart[exist];
+            return product;
+        })
+        setCart(previousCart);
     },[])
 
 

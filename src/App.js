@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import './App.css';
 import Header from './components/Header/Header';
+import Review from "./components/Review/Review";
 import Shop from './components/Shop/Shop';
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
                 <Shop></Shop>
             </Route>
             <Route path="/review">
-                <h1>This is Review</h1>
+                <Review></Review>
             </Route>
             <Route path="/inventory">
                 <h1>This is Inventory</h1>
