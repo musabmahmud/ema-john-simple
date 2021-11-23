@@ -1,4 +1,7 @@
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { Link } from 'react-router-dom';
 // import Product from '../Product/Product';
 import "./Cart.css";
 
@@ -12,7 +15,7 @@ const Cart = (props) => {
 
     if (subtotal > 0) {
         shippingCost = 80;
-        tax = subtotal / 10;
+        tax = subtotal * 0.15;
         total = shippingCost + tax + subtotal;
     }
 
@@ -29,7 +32,7 @@ const Cart = (props) => {
             <hr />
             <h4 className="title">Ordered Items: {cart.length}</h4>
 
-            <table>
+            <table className="CartTable">
                 <tbody>
                     <tr>
                         <td>Sub Total</td>
@@ -40,7 +43,7 @@ const Cart = (props) => {
                         <td>{format(shippingCost)}</td>
                     </tr>
                     <tr>
-                        <td>Tax + vat(10%)</td>
+                        <td>Tax + vat(15%)</td>
                         <td>{format(tax)}</td>
                     </tr>
                     <tr>
@@ -50,6 +53,7 @@ const Cart = (props) => {
                     </tr>
                 </tbody>
             </table>
+            <Link to={'/review'}><button className="order-Button">Order Review</button></Link>
         </div>
     );
 };
