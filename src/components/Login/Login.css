@@ -1,0 +1,16 @@
+.login {
+    text-align: center;
+    margin-top: 100px;
+}
+.gl_btn{
+    height: 50px;
+    width: 170px;
+    background-color:aquamarine;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+form .form_control{
+    padding: 15px 20px;
+    border-radius: 10px;
+}

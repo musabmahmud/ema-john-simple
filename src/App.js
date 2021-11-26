@@ -9,6 +9,8 @@ import Header from './components/Header/Header';
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Review from "./components/Review/Review";
 import Shop from './components/Shop/Shop';
+import Login from './components/Login/Login';
+import Shipment from './components/Shipment/Shipment';
 
 function App() {
   
@@ -28,6 +30,12 @@ function App() {
             </Route>
             <Route path="/inventory">
                 <h1>This is Inventory</h1>
+            </Route>
+            <Route path="/login">
+                <Login></Login>
+            </Route>
+            <Route path="/shipment">
+                <Shipment></Shipment>
             </Route>
             <Route path="/product/:productKey">
                 <ProductDetails></ProductDetails>
