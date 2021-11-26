@@ -6,9 +6,20 @@ import Data from "../../Data/products";
 import { addToDb, getStoredCart } from "../../utilities/db";
 
 const Shop = () => {
+    const [cart, setCart] = useState([]);
 
     const handleAddProduct = (product) => {
-        const newCart = [...cart, product];
+        const sameProduct = cart.find(pd => pd.key === product.key);
+        let newCart;
+        if(sameProduct){
+            sameProduct.quantity = sameProduct.quantity + 1;
+            const others = cart.filter(pd => pd.key !== product.key);
+            newCart = [...others, sameProduct];
+        }
+        else{
+            product.quantity = 1;
+            newCart = [...cart,product];
+        }
         setCart(newCart);
         addToDb(product.key);
     }
@@ -24,20 +35,18 @@ const Shop = () => {
         const savedCart = getStoredCart();
         const productKeys = Object.keys(savedCart);
         const previousCart = productKeys.map( exist => {
-            const product = Data.find(pd => pd.key === exist);
-            product.quantity = savedCart[exist];
-            return product;
+        const product = Data.find(pd => pd.key === exist);
+        product.quantity = savedCart[exist];
+        return product;
         })
         setCart(previousCart);
     },[])
 
-
-    const [cart, setCart] = useState([]);
     return (
         <div className="shop-container">
             <div className="product-container">
                 {
-                    products.map( pdValue => <Product handleAddProduct={handleAddProduct} product={pdValue} key={pdValue.key}>{pdValue.name}</Product>)
+                    products.map( pdValue => <Product handleAddProduct={handleAddProduct} product={pdValue} key={pdValue.key}></Product>)
                 }
             </div>
             <div className="cart-container">

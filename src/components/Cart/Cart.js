@@ -11,7 +11,7 @@ const Cart = (props) => {
     let tax = 0;
     let total = 0;
 
-    const subtotal = cart.reduce((subtotal, pdt) => subtotal + pdt.price, 0);
+    const subtotal = cart.reduce((subtotal, pdt) => subtotal + pdt.price * pdt.quantity, 0);
 
     if (subtotal > 0) {
         shippingCost = 80;
