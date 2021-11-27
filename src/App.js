@@ -10,7 +10,6 @@ import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Review from "./components/Review/Review";
 import Shop from './components/Shop/Shop';
 import Login from './components/Login/Login';
-import Logout from './components/Logout/Logout';
 import Shipment from './components/Shipment/Shipment';
 import { createContext, useState } from "react";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
