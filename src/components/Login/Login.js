@@ -1,15 +1,22 @@
 import './Login.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { initializeApp } from 'firebase/app'; 
 import { } from 'firebase/auth';
 import FirebaseConfig from './Firebase.config';
 import { getAuth, signInWithPopup,createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider,signOut} from "firebase/auth";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { UserContext } from '../../App';
+import { useHistory, useLocation } from 'react-router';
 
 const app = initializeApp(FirebaseConfig);
 
 
 function Login() {
+  let history = useHistory();
+  let location = useLocation();
+  let { from } = location.state || { from: { pathname: "/" } };
+
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+
   const provider = new GoogleAuthProvider();
 
   const [newUser, setNewUser] = useState(false);
@@ -41,7 +48,8 @@ function Login() {
           photo: photoURL
         }
         setUser(signedInUser);
-
+        setLoggedInUser(signedInUser);
+        history.replace(from);
       }).catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -85,6 +93,8 @@ function Login() {
           newUserInfo.success = true;
           newUserInfo.isSignIn = true;
           setUser(newUserInfo);
+          setLoggedInUser(newUserInfo);
+          history.replace(from);
         })
         .catch((error) => {
           console.log(error.message, error.code);
@@ -133,6 +143,7 @@ function Login() {
           photo: ''
         }
         setUser(signedOutUser);
+        setLoggedInUser(signedOutUser);
       }).catch((error) => {
         const errorCode = error.code;
         console.log(errorCode);
@@ -142,15 +153,7 @@ function Login() {
 
   return (
     <div className="login">
-      {user.isSignIn ?
-        <div>
-          <h1>Hello, {user.userName}</h1>
-          <p>Email : {user.email}</p>
-          <img src={user.photo} width="300" height="300" alt={user.userName}/><br/>
-          <button className="gl_btn" style={{marginTop: '20px'}} onClick={handleSignOut}>Sign Out</button>
-        </div>
-        :
-        <div>
+          <h1>{loggedInUser.email}</h1>
           {
             newUser ? 
             <div>
@@ -167,19 +170,17 @@ function Login() {
             :
             <div>
               <form onSubmit={signInCheck}>
-                <input className="form_control" className="form_control" type="text" name="email" placeholder="Enter your Email" onBlur={handleBlur} required/><br/><br/>
+                <input className="form_control" type="text" name="email" placeholder="Enter your Email" onBlur={handleBlur} required/><br/><br/>
                 <input className="form_control" type="password" name="password" placeholder="Enter your Password" onBlur={handleBlur} required/><br/><br/>
                 <button className="gl_btn">Logged In</button>
               </form>
               <button className="gl_btn" style={{background: 'yellow', marginTop:'5px'}} onClick={() => setNewUser(!newUser)}>Create New</button>
             </div>
           }
-          {user.success && <p style={{color: 'green', textDecoration: 'capitalize'}}>User {newUser ? 'Created' : 'Logged In'} Successfully</p>}
+          {user.success && <p style={{color: 'green', textDecoration: 'capitalize'}}>User {newUser ? 'Created' : 'logged in'} Successfully</p>}
           {user.error && <p style={{color: 'red'}}>{user.error}</p>}
-          <button className="gl_btn" onClick={() => handleGoogle()} style={{marginTop:'5px'}}><FontAwesomeIcon icon="fa-brands fa-google" /> Signin With Google</button>
+          <button className="gl_btn" onClick={() => handleGoogle()} style={{marginTop:'5px'}}>Signin With Google</button>
         </div>
-      }
-    </div>
   );
 } 
 

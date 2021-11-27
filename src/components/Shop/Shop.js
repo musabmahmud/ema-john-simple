@@ -4,6 +4,7 @@ import Product from "../Product/Product";
 import Cart from "../Cart/Cart";
 import Data from "../../Data/products";
 import { addToDb, getStoredCart } from "../../utilities/db";
+import { Link } from 'react-router-dom';
 
 const Shop = () => {
     const [cart, setCart] = useState([]);
@@ -51,6 +52,7 @@ const Shop = () => {
             </div>
             <div className="cart-container">
                 <Cart cart={cart}></Cart>
+                <Link to={'/review'}><button className="order-Button">Order Review</button></Link>
             </div>
         </div>
     );

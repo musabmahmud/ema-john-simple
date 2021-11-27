@@ -5,6 +5,8 @@ import "./Review.css";
 import { addToDb, deleteFromDb, getStoredCart } from "../../utilities/db";
 import Cart from '../Cart/Cart';
 import ReviewItem from '../ReviewItem/ReviewItem';
+import { useHistory } from 'react-router-dom';
+
 const Review = () => {
     const [cart, setCart] = useState([]);
     useEffect( () => {
@@ -38,6 +40,12 @@ const Review = () => {
         }
         deleteFromDb(product.key); 
     }
+
+    const  history = useHistory();
+
+    const proceedOrder = () =>{
+        history.push("/shipment");
+    }
     return (
         <div className="shop-container">
             <div className="product-container">
@@ -62,6 +70,7 @@ const Review = () => {
             </div>
             <div className="cart-container">
                 <Cart cart={cart}></Cart>
+                <button className="order-Button" onClick={() => proceedOrder()}>Order Proceed</button>
             </div>
         </div>
     );

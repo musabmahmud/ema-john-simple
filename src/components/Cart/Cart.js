@@ -53,7 +53,6 @@ const Cart = (props) => {
                     </tr>
                 </tbody>
             </table>
-            <Link to={'/review'}><button className="order-Button">Order Review</button></Link>
         </div>
     );
 };
