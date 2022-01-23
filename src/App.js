@@ -1,8 +1,7 @@
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import './App.css';
 import Header from './components/Header/Header';
@@ -13,6 +12,7 @@ import Login from './components/Login/Login';
 import Shipment from './components/Shipment/Shipment';
 import { createContext, useState } from "react";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import Home from "./components/Home/Home";
 
 export const UserContext = createContext();
 
@@ -26,7 +26,7 @@ function App() {
           <Header></Header>
           <Switch>
             <Route exact path="/">
-              <h1>Home</h1>
+                <Home></Home>
             </Route>
             <Route path="/shop">
                 <Shop></Shop>
